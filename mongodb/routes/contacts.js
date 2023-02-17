@@ -30,6 +30,20 @@ router.get('/', function (req, res, next) {
      );
    });
   
+   router.get('/delete/:id', function (req, res, next) {
+  Contact.findByIdAndDelete(req.params.id,
+    (err, data) => {
+      console.log(data);
+      /* return res.status(200).send("deleted").end(); */
+      res.redirect('/contacts');
+    }
+  );
+});
    
-  
+   router.get('/find/:id', function (req, res, next) {
+      Contact.findById(req.params.id,
+        (err, contacts) => { res.json(contacts); }
+      );
+    });
+    
   module.exports = router;
